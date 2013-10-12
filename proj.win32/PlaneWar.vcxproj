@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
+    <ProjectGuid>{EFE94B79-2F07-4649-BEDE-8CA6A5880C82}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -128,12 +128,17 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\base\BaseScene.cpp" />
+    <ClCompile Include="..\Classes\common\VisibleRect.cpp" />
+    <ClCompile Include="..\Classes\GameMain.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\base\BaseScene.h" />
+    <ClInclude Include="..\Classes\common\PPHeaders.h" />
+    <ClInclude Include="..\Classes\common\VisibleRect.h" />
+    <ClInclude Include="..\Classes\GameMain.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
