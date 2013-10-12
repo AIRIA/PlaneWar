@@ -11,3 +11,7 @@
 *.lai
 *.la
 *.a
+
+# Compiled Dir
+proj.win32/Debug.win32
+
