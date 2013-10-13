@@ -16,6 +16,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
     eglView->setViewName("PlaneWar");
-    eglView->setFrameSize(240, 400);
+    eglView->setFrameSize(360, 600);
     return CCApplication::sharedApplication()->run();
 }

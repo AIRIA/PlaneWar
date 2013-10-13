@@ -28,7 +28,7 @@ void GameMain::__initBackground()
     bg1->setAnchorPoint(ccp(0.5,0));
     bg2->setAnchorPoint(ccp(0.5,0));
     bg1->setPosition(ccp(0,0));
-    bg2->setPosition(ccp(0,m_nBgHeight-1));
+    bg2->setPosition(ccp(0,851));
     m_pBgNode->addChild(bg1);
     m_pBgNode->addChild(bg2);
     addChild(m_pBgNode);
@@ -42,7 +42,7 @@ void GameMain::__scrollBackground()
         CCLog("循环一次完成");
         m_pBgNode->setPositionY(0);
     }
-    CCActionInterval *moveDown = CCMoveBy::create(109, ccp(0, -850));
+    CCActionInterval *moveDown = CCMoveTo::create(10, ccp(m_iWinSize.width/2, -851));
     CCCallFunc *resetHandler = CCCallFunc::create(this, callfunc_selector(GameMain::__scrollBackground));
     CCSequence *moveSeq = CCSequence::create(moveDown,resetHandler,NULL);
     m_pBgNode->runAction(moveSeq);
