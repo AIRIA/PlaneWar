@@ -9,10 +9,12 @@ class GameMain:public BaseScene
 private:
     void __initBackground();
     void __scrollBackground();
+    void __initLoadingAnimation();
+    void __initCopyRight();
     CCSpriteBatchNode *m_pBgNode;
     float m_nBgHeight;
 public:
-    GameMain():m_nBgHeight(851.5f){};
+    GameMain():m_nBgHeight(851){};
 	virtual void loadAssets();
 	virtual bool init();
 	CREATE_FUNC(GameMain);

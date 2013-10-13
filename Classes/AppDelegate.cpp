@@ -17,7 +17,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCDirector* pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
     pDirector->setOpenGLView(pEGLView);
-    pEGLView->setDesignResolutionSize(480,852,kResolutionExactFit);
+    pEGLView->setDesignResolutionSize(480,800,kResolutionExactFit);
     pDirector->setDisplayStats(true);
     pDirector->setAnimationInterval(1.0 / 60);
     SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("sound/game_music.mp3");
