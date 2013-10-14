@@ -8,6 +8,7 @@ class Hero:public PPSprite
 {
 private:
     void __attack();
+	void __init();
 public:
     virtual void onEnter();
 	virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);

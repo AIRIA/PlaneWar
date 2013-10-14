@@ -20,7 +20,7 @@ void Hero::__attack()
 {
     CCDelayTime *delay = CCDelayTime::create(0.13f);
     Bullet *bullet = Bullet::createBullet();
-    bullet->setPosition(ccp(getPosition().x,getPosition().y+getContentSize().height/2-20));
+    bullet->setPosition(ccp(getPosition().x,getPosition().y+getContentSize().height/2-5));
     CCCallFunc *callback = CCCallFunc::create(this,callfunc_selector(Hero::__attack));
     CCSequence *seq = CCSequence::create(delay,callback,NULL);
 	bullet->setZOrder(-1);

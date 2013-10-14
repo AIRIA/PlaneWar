@@ -131,6 +131,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClCompile Include="..\Classes\base\BaseScene.cpp" />
     <ClCompile Include="..\Classes\base\PPSprite.cpp" />
     <ClCompile Include="..\Classes\common\VisibleRect.cpp" />
+    <ClCompile Include="..\Classes\components\BaseEnemy.cpp" />
     <ClCompile Include="..\Classes\components\Bullet.cpp" />
     <ClCompile Include="..\Classes\components\Hero.cpp" />
     <ClCompile Include="..\Classes\GameMain.cpp" />
@@ -142,6 +143,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\Classes\base\PPSprite.h" />
     <ClInclude Include="..\Classes\common\PPHeaders.h" />
     <ClInclude Include="..\Classes\common\VisibleRect.h" />
+    <ClInclude Include="..\Classes\components\BaseEnemy.h" />
     <ClInclude Include="..\Classes\components\Bullet.h" />
     <ClInclude Include="..\Classes\components\Hero.h" />
     <ClInclude Include="..\Classes\GameMain.h" />

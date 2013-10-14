@@ -18,7 +18,7 @@ bool GameMain::init()
     m_pBattleBatchNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("hero1.png")->getTexture());
     addChild(m_pBattleBatchNode);
     //SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
-    __initLoadingAnimation();
+    __initAnimation();
     __initBackground();
     __initCopyRight();
     return bRet;
@@ -46,18 +46,13 @@ void GameMain::__scrollBackground()
     m_pBgNode->runAction(moveSeq);
 }
 
-inline void GameMain::__initLoadingAnimation()
+inline void GameMain::__initAnimation()
 {
-    CCArray *loadingFrames = CCArray::createWithCapacity(4);
-    for(int i=1; i<5; i++)
-    {
-        const char *pszName = CCString::createWithFormat("game_loading%d.png",i)->getCString();
-        CCSpriteFrame *loadingFrame = m_pFrameCache->spriteFrameByName(pszName);
-        loadingFrames->addObject(loadingFrame);
-    }
-    CCAnimation *loadingAnimation = CCAnimation::createWithSpriteFrames(loadingFrames,0.5f);
-    CCAnimationCache *animationCache = CCAnimationCache::sharedAnimationCache();
-    animationCache->addAnimation(loadingAnimation, "loading");
+    __addAnimation("game_loading%d.png",1,4,2,"loading");
+    __addAnimation("enemy1_down%d.png",1,4,8,"enemy1_down");
+    __addAnimation("enemy2_down%d.png",1,4,8,"enemy2_down");
+    __addAnimation("enemy3_down%d.png",1,6,8,"enemy3_down");
+    __addAnimation("hero_blowup_n%d.png",1,4,8,"hero_down");
 }
 
 inline void GameMain::__initCopyRight()
@@ -81,6 +76,7 @@ void GameMain::__gameStart()
     m_pBgNode->removeChild(m_pLoading,true);
     m_pBgNode->removeChild(m_pCopyRight,true);
     __createHero();
+    __createEnemy();
 }
 
 void GameMain::__restart()
@@ -98,4 +94,24 @@ void GameMain::__createHero()
 void GameMain::__gameOver()
 {
 
+}
+
+void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,const char *animationName )
+{
+    CCArray *spriteFrames = CCArray::createWithCapacity(end);
+    for(int i=start; i<=end; i++)
+    {
+        const char *pszName = CCString::createWithFormat(prefix,i)->getCString();
+        CCSpriteFrame *spriteFrame = m_pFrameCache->spriteFrameByName(pszName);
+        spriteFrames->addObject(spriteFrame);
+    }
+    CCAnimation *animation = CCAnimation::createWithSpriteFrames(spriteFrames,1.0/fps);
+    CCAnimationCache::sharedAnimationCache()->addAnimation(animation,animationName);
+}
+
+void GameMain::__createEnemy()
+{
+    BaseEnemy *enemy = BaseEnemy::createEnemy(3);
+    enemy->setPosition(VisibleRect::top());
+    m_pBattleBatchNode->addChild(enemy);
 }

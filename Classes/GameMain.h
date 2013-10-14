@@ -4,20 +4,24 @@
 #include "common/PPHeaders.h"
 #include "base/BaseScene.h"
 #include "components/Hero.h"
+#include "components/BaseEnemy.h"
+
 class GameMain:public BaseScene
 {
 private:
     CCSprite *m_pCopyRight;
     CCSprite *m_pLoading;
     Hero *m_pHero;
+    void __addAnimation(const char *prefix,int start,int end,int fps,const char *animationName);
     void __gameStart();
     void __initBackground();
     void __scrollBackground();
-    void __initLoadingAnimation();
+    void __initAnimation();
     void __initCopyRight();
     void __restart();
     void __createHero();
     void __gameOver();
+	void __createEnemy();
     CCSpriteBatchNode *m_pBgNode;
     CCSpriteBatchNode *m_pBattleBatchNode;
     float m_nBgHeight;

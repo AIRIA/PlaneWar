@@ -42,6 +42,9 @@
     <ClCompile Include="..\Classes\components\Bullet.cpp">
       <Filter>Classes\components</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\components\BaseEnemy.cpp">
+      <Filter>Classes\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -69,6 +72,9 @@
       <Filter>Classes\components</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\components\Bullet.h">
+      <Filter>Classes\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\components\BaseEnemy.h">
       <Filter>Classes\components</Filter>
     </ClInclude>
   </ItemGroup>
