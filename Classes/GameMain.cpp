@@ -78,7 +78,9 @@ void GameMain::__gameStart()
     m_pBgNode->removeChild(m_pLoading,true);
     m_pBgNode->removeChild(m_pCopyRight,true);
     __createHero();
-    __createEnemy();
+    __createEnemy1();
+    __createEnemy2();
+    __createEnemy3();
 }
 
 void GameMain::__restart()
@@ -111,13 +113,33 @@ void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,cons
     CCAnimationCache::sharedAnimationCache()->addAnimation(animation,animationName);
 }
 
-void GameMain::__createEnemy()
+void GameMain::__createEnemy1()
 {
-    int type = rand()%3+1;
-    BaseEnemy *enemy = BaseEnemy::createEnemy(type);
+    float time = (rand()%10)/10.0f+1.0f;
+    BaseEnemy *enemy = BaseEnemy::createEnemy(1);
     m_pBattleBatchNode->addChild(enemy);
-    CCDelayTime *delay = CCDelayTime::create(1.5f);
-    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy));
+    CCDelayTime *delay = CCDelayTime::create(time);
+    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy1));
+    CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
+    runAction(seq);
+}
+void GameMain::__createEnemy2()
+{
+    float time = rand()%3+2;
+    BaseEnemy *enemy = BaseEnemy::createEnemy(2);
+    m_pBattleBatchNode->addChild(enemy);
+    CCDelayTime *delay = CCDelayTime::create(time);
+    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy2));
+    CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
+    runAction(seq);
+}
+void GameMain::__createEnemy3()
+{
+    float time = rand()%3+4;
+    BaseEnemy *enemy = BaseEnemy::createEnemy(3);
+    m_pBattleBatchNode->addChild(enemy);
+    CCDelayTime *delay = CCDelayTime::create(time);
+    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy3));
     CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
     runAction(seq);
 }
