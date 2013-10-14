@@ -44,7 +44,8 @@ void BaseEnemy::setType( int val )
 BaseEnemy * BaseEnemy::createEnemy( int type )
 {
     BaseEnemy *be = new BaseEnemy();
-    be->speed = 300/type;
+    be->speed = 200/type+rand()%100;
+    CCLog("speed:%f",be->speed);
     const char *enemyName = CCString::createWithFormat("enemy%d.png",type)->getCString();
     if(type==3)
     {

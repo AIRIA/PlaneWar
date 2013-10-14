@@ -13,7 +13,7 @@ bool GameMain::init()
     {
         bRet = false;
     }
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
     m_pBgNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("background.png")->getTexture());
     addChild(m_pBgNode);
     m_pBattleBatchNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("hero1.png")->getTexture());
@@ -50,7 +50,8 @@ void GameMain::__scrollBackground()
 inline void GameMain::__initAnimation()
 {
     __addAnimation("game_loading%d.png",1,4,2,"loading");
-    __addAnimation("enemy1_down%d.png",1,4,8,"enemy1_down");
+    __addAnimation("hero%d.png",1,2,8,"hero");
+    __addAnimation("enemy1_down%d.png",1,4,12,"enemy1_down");
     __addAnimation("enemy2_down%d.png",1,4,8,"enemy2_down");
     __addAnimation("enemy3_down%d.png",1,6,8,"enemy3_down");
     __addAnimation("hero_blowup_n%d.png",1,4,8,"hero_down");
@@ -115,7 +116,7 @@ void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,cons
 
 void GameMain::__createEnemy1()
 {
-    float time = (rand()%10)/10.0f+1.0f;
+    float time = (rand()%10)/30.0f+0.3f;
     BaseEnemy *enemy = BaseEnemy::createEnemy(1);
     m_pBattleBatchNode->addChild(enemy);
     CCDelayTime *delay = CCDelayTime::create(time);
@@ -135,7 +136,7 @@ void GameMain::__createEnemy2()
 }
 void GameMain::__createEnemy3()
 {
-    float time = rand()%3+4;
+    float time = rand()%8+8;
     BaseEnemy *enemy = BaseEnemy::createEnemy(3);
     m_pBattleBatchNode->addChild(enemy);
     CCDelayTime *delay = CCDelayTime::create(time);

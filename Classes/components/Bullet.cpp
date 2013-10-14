@@ -1,5 +1,5 @@
 ﻿#include "Bullet.h"
-#define SPEED 300.0f
+#define SPEED 500.0f
 Bullet * Bullet::createBullet()
 {
     Bullet *bullet = new Bullet();
