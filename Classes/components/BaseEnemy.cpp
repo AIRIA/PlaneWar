@@ -20,6 +20,7 @@ void BaseEnemy::__init()
 {
     setAnchorPoint(ccp(0.5,0));
     m_iWinSize = CCDirector::sharedDirector()->getWinSize();
+    __getRandomPosition();
 }
 
 void BaseEnemy::setType( int val )
@@ -56,4 +57,13 @@ BaseEnemy * BaseEnemy::createEnemy( int type )
         be->__init();
     }
     return be;
+}
+
+void BaseEnemy::__getRandomPosition()
+{
+    CCSize size = getContentSize();
+    float left = size.width/2;
+    float range = m_iWinSize.width-size.width;
+    int offsetx = rand()%(int)(range);
+    setPosition(ccp(offsetx+left,VisibleRect::top().y));
 }

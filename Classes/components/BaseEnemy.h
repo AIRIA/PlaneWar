@@ -9,6 +9,7 @@ private:
     void __attack();
     CCSize m_iWinSize;
     void __init();
+	void __getRandomPosition();
     int m_nType;
 public:
     void setType(int val);

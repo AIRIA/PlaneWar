@@ -13,11 +13,12 @@ bool GameMain::init()
     {
         bRet = false;
     }
+    srand(time(NULL));
     m_pBgNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("background.png")->getTexture());
     addChild(m_pBgNode);
     m_pBattleBatchNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("hero1.png")->getTexture());
     addChild(m_pBattleBatchNode);
-    //SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
+
     __initAnimation();
     __initBackground();
     __initCopyRight();
@@ -72,6 +73,7 @@ inline void GameMain::__initCopyRight()
 
 void GameMain::__gameStart()
 {
+    SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
     __scrollBackground();
     m_pBgNode->removeChild(m_pLoading,true);
     m_pBgNode->removeChild(m_pCopyRight,true);
@@ -111,7 +113,11 @@ void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,cons
 
 void GameMain::__createEnemy()
 {
-    BaseEnemy *enemy = BaseEnemy::createEnemy(3);
-    enemy->setPosition(VisibleRect::top());
+    int type = rand()%3+1;
+    BaseEnemy *enemy = BaseEnemy::createEnemy(type);
     m_pBattleBatchNode->addChild(enemy);
+    CCDelayTime *delay = CCDelayTime::create(1.5f);
+    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy));
+    CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
+    runAction(seq);
 }
