@@ -21,9 +21,10 @@ private:
     void __restart();
     void __createHero();
     void __gameOver();
-	void __createEnemy1();
-	void __createEnemy2();
-	void __createEnemy3();
+    void __createEnemy(int type,float time,SEL_CallFunc selector);
+    void __createEnemy1();
+    void __createEnemy2();
+    void __createEnemy3();
     CCSpriteBatchNode *m_pBgNode;
     CCSpriteBatchNode *m_pBattleBatchNode;
     float m_nBgHeight;

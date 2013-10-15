@@ -45,6 +45,9 @@
     <ClCompile Include="..\Classes\components\BaseEnemy.cpp">
       <Filter>Classes\components</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\common\ShareVars.cpp">
+      <Filter>Classes\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\components\BaseEnemy.h">
       <Filter>Classes\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\common\ShareVars.h">
+      <Filter>Classes\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

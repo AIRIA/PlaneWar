@@ -7,6 +7,7 @@
 class Hero:public PPSprite
 {
 private:
+	CCSize m_iWinSize;
     void __attack();
 	void __init();
 public:

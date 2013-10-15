@@ -4,6 +4,7 @@ void BaseEnemy::onEnter()
 {
     CCSprite::onEnter();
     __attack();
+	enemies->addObject(this);
 }
 
 void BaseEnemy::__attack()
@@ -67,4 +68,10 @@ void BaseEnemy::__getRandomPosition()
     float range = m_iWinSize.width-size.width;
     int offsetx = rand()%(int)(range);
     setPosition(ccp(offsetx+left,VisibleRect::top().y));
+}
+
+void BaseEnemy::onExit()
+{
+	CCSprite::onExit();
+	enemies->fastRemoveObject(this);
 }

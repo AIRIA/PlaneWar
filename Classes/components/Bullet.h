@@ -11,6 +11,7 @@ private:
     virtual void __init();
 public:
     virtual void onEnter();
+    virtual void onExit();
     static Bullet *createBullet();
 };
 

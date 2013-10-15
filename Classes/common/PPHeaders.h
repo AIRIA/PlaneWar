@@ -5,6 +5,7 @@
 #include "cocos-ext.h"
 #include "VisibleRect.h"
 #include "SimpleAudioEngine.h"
+#include "ShareVars.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

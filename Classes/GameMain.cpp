@@ -13,6 +13,11 @@ bool GameMain::init()
     {
         bRet = false;
     }
+    enemies = CCArray::create();
+    bullets = CCArray::create();
+    enemies->retain();
+    bullets->retain();
+
     srand((unsigned)time(NULL));
     m_pBgNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("background.png")->getTexture());
     addChild(m_pBgNode);
@@ -74,6 +79,7 @@ inline void GameMain::__initCopyRight()
 
 void GameMain::__gameStart()
 {
+	
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
     __scrollBackground();
     m_pBgNode->removeChild(m_pLoading,true);
@@ -117,30 +123,25 @@ void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,cons
 void GameMain::__createEnemy1()
 {
     float time = (rand()%10)/30.0f+0.3f;
-    BaseEnemy *enemy = BaseEnemy::createEnemy(1);
-    m_pBattleBatchNode->addChild(enemy);
-    CCDelayTime *delay = CCDelayTime::create(time);
-    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy1));
-    CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
-    runAction(seq);
+    __createEnemy(1,time,callfunc_selector(GameMain::__createEnemy1));
 }
 void GameMain::__createEnemy2()
 {
     float time = rand()%3+2;
-    BaseEnemy *enemy = BaseEnemy::createEnemy(2);
-    m_pBattleBatchNode->addChild(enemy);
-    CCDelayTime *delay = CCDelayTime::create(time);
-    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy2));
-    CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
-    runAction(seq);
+    __createEnemy(2,time,callfunc_selector(GameMain::__createEnemy2));
 }
 void GameMain::__createEnemy3()
 {
     float time = rand()%8+8;
-    BaseEnemy *enemy = BaseEnemy::createEnemy(3);
+    __createEnemy(3,time,callfunc_selector(GameMain::__createEnemy3));
+}
+
+void GameMain::__createEnemy(int type, float time,SEL_CallFunc selector )
+{
+    BaseEnemy *enemy = BaseEnemy::createEnemy(type);
     m_pBattleBatchNode->addChild(enemy);
     CCDelayTime *delay = CCDelayTime::create(time);
-    CCCallFunc *delayCall = CCCallFunc::create(this,callfunc_selector(GameMain::__createEnemy3));
+    CCCallFunc *delayCall = CCCallFunc::create(this,selector);
     CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
     runAction(seq);
 }

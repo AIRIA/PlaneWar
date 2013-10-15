@@ -15,6 +15,7 @@ public:
     void setType(int val);
     float speed;
     virtual void onEnter();
+	virtual void onExit();
     static BaseEnemy *createEnemy(int type);
 };
 

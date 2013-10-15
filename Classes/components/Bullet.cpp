@@ -33,5 +33,14 @@ void Bullet::onEnter()
 {
     CCSprite::onEnter();
     __attack();
+	bullets->addObject(this);
+	CCLog("bullets num %d",bullets->count());
+}
+
+void Bullet::onExit()
+{
+    CCSprite::onExit();
+    bullets->fastRemoveObject(this);
+	CCLog("bullets num %d",bullets->count());
 }
 
