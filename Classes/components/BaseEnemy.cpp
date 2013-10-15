@@ -1,5 +1,10 @@
 ﻿#include "BaseEnemy.h"
 
+BaseEnemy::BaseEnemy():m_nHP(100)
+{
+    
+};
+
 void BaseEnemy::onEnter()
 {
     CCSprite::onEnter();
@@ -57,6 +62,7 @@ BaseEnemy * BaseEnemy::createEnemy( int type )
     {
         be->autorelease();
         be->__init();
+        be->m_nHP = type+(type-1)*(type+1);
     }
     return be;
 }

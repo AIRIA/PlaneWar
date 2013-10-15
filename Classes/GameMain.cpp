@@ -79,7 +79,7 @@ inline void GameMain::__initCopyRight()
 
 void GameMain::__gameStart()
 {
-	
+	scheduleUpdate();
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
     __scrollBackground();
     m_pBgNode->removeChild(m_pLoading,true);
@@ -104,7 +104,7 @@ void GameMain::__createHero()
 
 void GameMain::__gameOver()
 {
-
+    CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
 }
 
 void GameMain::__addAnimation( const char *prefix,int start,int end,int fps,const char *animationName )
@@ -144,4 +144,49 @@ void GameMain::__createEnemy(int type, float time,SEL_CallFunc selector )
     CCCallFunc *delayCall = CCCallFunc::create(this,selector);
     CCSequence *seq = CCSequence::create(delay,delayCall,NULL);
     runAction(seq);
+}
+
+void GameMain::update(float del)
+{
+    CCArray *waitRemoveBullet = CCArray::create();
+    CCArray *waitRemoveEnemy = CCArray::create();
+    CCObject *enemyObj = NULL;
+    CCObject *bulletObj = NULL;
+    CCARRAY_FOREACH(enemies, enemyObj)
+    {
+        BaseEnemy *enemy = (BaseEnemy*)enemyObj;
+        CCARRAY_FOREACH(bullets, bulletObj)
+        {
+            Bullet *bullet = (Bullet*)bulletObj;
+            if(bullet->getLock())
+            {
+                continue;
+            }
+            CCPoint bulletPos = bullet->getPosition();
+            int enemyLeft = enemy->getPositionX()-enemy->getContentSize().width/2;
+            int enemyRight = enemy->getPositionX()+enemy->getContentSize().width/2;
+            if(bulletPos.y >= enemy->getPositionY()&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
+            {
+                bullet->setLock(true);
+                waitRemoveBullet->addObject(bullet);
+                enemy->m_nHP -= 1;
+                if(enemy->m_nHP<=0)
+                {
+                    waitRemoveEnemy->addObject(enemy);
+                }
+            }
+        }
+    }
+    CCARRAY_FOREACH(waitRemoveEnemy, enemyObj)
+    {
+        BaseEnemy *enemy = (BaseEnemy*)enemyObj;
+        enemies->removeObject(enemy,false);
+        enemy->removeFromParent();
+    }
+    CCARRAY_FOREACH(waitRemoveBullet, bulletObj)
+    {
+        Bullet *bullet = (Bullet*)bulletObj;
+        bullets->removeObject(bullet,false);
+        bullet->removeFromParent();
+    }
 }

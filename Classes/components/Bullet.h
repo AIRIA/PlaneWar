@@ -9,7 +9,14 @@ private:
     CCSize m_iWinSize;
     void __attack();
     virtual void __init();
+    bool m_bIsLock;
 public:
+    void setLock(bool val){
+        m_bIsLock = val;
+    };
+    bool getLock() const{
+        return m_bIsLock;
+    };
     virtual void onEnter();
     virtual void onExit();
     static Bullet *createBullet();

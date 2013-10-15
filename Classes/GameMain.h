@@ -32,6 +32,7 @@ public:
     GameMain():m_nBgHeight(851) {};
     virtual void loadAssets();
     virtual bool init();
+    virtual void update(float);
     CREATE_FUNC(GameMain);
 };
 

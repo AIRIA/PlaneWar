@@ -208,6 +208,7 @@
 		41BC70E815BF81A5006A0A6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70E115BF81A5006A0A6C /* main.m */; };
 		8C583FAD169DB6D500F63A10 /* CCEditBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C583FA8169DB6D500F63A10 /* CCEditBox.cpp */; };
 		8C583FAE169DB6D500F63A10 /* CCEditBoxImplMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C583FAC169DB6D500F63A10 /* CCEditBoxImplMac.mm */; };
+		8E031559180D72AC00E04ADA /* ShareVars.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E031557180D72AC00E04ADA /* ShareVars.cpp */; };
 		8E4E41C3180A51990098C2AC /* shoot in Resources */ = {isa = PBXBuildFile; fileRef = 8E4E41BB180A51980098C2AC /* shoot */; };
 		8E4E41C4180A51990098C2AC /* shoot_bg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4E41BC180A51980098C2AC /* shoot_bg */; };
 		8E4E41C5180A51990098C2AC /* shoot_bg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E4E41BD180A51980098C2AC /* shoot_bg.plist */; };
@@ -652,6 +653,8 @@
 		8C583FAA169DB6D500F63A10 /* CCEditBoxImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEditBoxImpl.h; path = CCEditBox/CCEditBoxImpl.h; sourceTree = "<group>"; };
 		8C583FAB169DB6D500F63A10 /* CCEditBoxImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEditBoxImplMac.h; path = CCEditBox/CCEditBoxImplMac.h; sourceTree = "<group>"; };
 		8C583FAC169DB6D500F63A10 /* CCEditBoxImplMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCEditBoxImplMac.mm; path = CCEditBox/CCEditBoxImplMac.mm; sourceTree = "<group>"; };
+		8E031557180D72AC00E04ADA /* ShareVars.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShareVars.cpp; sourceTree = "<group>"; };
+		8E031558180D72AC00E04ADA /* ShareVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareVars.h; sourceTree = "<group>"; };
 		8E4E41BB180A51980098C2AC /* shoot */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shoot; sourceTree = "<group>"; };
 		8E4E41BC180A51980098C2AC /* shoot_bg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shoot_bg; sourceTree = "<group>"; };
 		8E4E41BD180A51980098C2AC /* shoot_bg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = shoot_bg.plist; sourceTree = "<group>"; };
@@ -1516,6 +1519,8 @@
 		8EBCA654180C26C700E67BCA /* common */ = {
 			isa = PBXGroup;
 			children = (
+				8E031557180D72AC00E04ADA /* ShareVars.cpp */,
+				8E031558180D72AC00E04ADA /* ShareVars.h */,
 				8EBCA655180C26C700E67BCA /* PPHeaders.h */,
 				8EBCA656180C26C700E67BCA /* tpl */,
 				8EBCA657180C26C700E67BCA /* VisibleRect.cpp */,
@@ -1829,6 +1834,7 @@
 				8EBCA66B180C26C700E67BCA /* Bullet.cpp in Sources */,
 				8EBCA66C180C26C700E67BCA /* Hero.cpp in Sources */,
 				8EBCA66E180C26C700E67BCA /* GameMain.cpp in Sources */,
+				8E031559180D72AC00E04ADA /* ShareVars.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

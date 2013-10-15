@@ -20,7 +20,7 @@ void Hero::onEnter()
 
 void Hero::__attack()
 {
-	//SimpleAudioEngine::sharedEngine()->playEffect("sound/bullet.mp3");
+	SimpleAudioEngine::sharedEngine()->playEffect("sound/bullet.mp3");
     CCDelayTime *delay = CCDelayTime::create(0.1f);
     float posY = getPositionY()+getContentSize().height/2;
     if(posY<m_iWinSize.height)

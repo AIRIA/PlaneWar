@@ -12,10 +12,12 @@ private:
 	void __getRandomPosition();
     int m_nType;
 public:
+    int m_nHP;
     void setType(int val);
     float speed;
     virtual void onEnter();
 	virtual void onExit();
+    BaseEnemy();
     static BaseEnemy *createEnemy(int type);
 };
 
