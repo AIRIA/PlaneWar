@@ -17,16 +17,22 @@ bool GameMain::init()
     bullets = CCArray::create();
     enemies->retain();
     bullets->retain();
-
+    
     srand((unsigned)time(NULL));
     m_pBgNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("background.png")->getTexture());
     addChild(m_pBgNode);
     m_pBattleBatchNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("hero1.png")->getTexture());
     addChild(m_pBattleBatchNode);
-
+    
     __initAnimation();
     __initBackground();
     __initCopyRight();
+    m_pScore = CCLabelBMFont::create(" ", "ui/font.fnt");
+    m_pScore->setZOrder(100);
+    m_pScore->setPosition(ccp(100,VisibleRect::top().y-30));
+    addChild(m_pScore);
+    m_nScore = 0;
+    m_pScore->setColor(ccc3(0, 0, 0));
     return bRet;
 }
 
@@ -89,6 +95,27 @@ void GameMain::__gameStart()
     __createEnemy1();
     __createEnemy2();
     __createEnemy3();
+    __initPauseBtn();
+}
+
+void GameMain::__initPauseBtn()
+{
+    CCSprite *pauseNormal = CCSprite::createWithSpriteFrameName("game_pause_nor.png");
+    CCSprite *pausePressed = CCSprite::createWithSpriteFrameName("game_pause_pressed.png");
+    CCMenuItemSprite *pauseItem = CCMenuItemSprite::create(pauseNormal, pausePressed,this,menu_selector(GameMain::__pauseGame));
+    CCMenu *pauseMenu = CCMenu::create(pauseItem,NULL);
+    pauseMenu->setPosition(ccp(30,VisibleRect::top().y-30));
+    addChild(pauseMenu);
+}
+
+void GameMain::__pauseGame(CCObject *pSender)
+{
+    if(CCDirector::sharedDirector()->isPaused()){
+        CCDirector::sharedDirector()->resume();
+    }else{
+        CCDirector::sharedDirector()->pause();
+    }
+
 }
 
 void GameMain::__restart()
@@ -164,10 +191,13 @@ void GameMain::update(float del)
                 continue;
             }
             CCPoint bulletPos = bullet->getPosition();
+            int type = enemy->getType();
             int enemyLeft = enemy->getPositionX()-enemy->getContentSize().width/2;
             int enemyRight = enemy->getPositionX()+enemy->getContentSize().width/2;
-			 int type = enemy->getType();
-            if(bulletPos.y >= enemy->getPositionY()+type*5&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
+            int enemyTop = enemy->getPositionY()+enemy->getContentSize().height;
+            int enemyBottom = enemy->getPositionY()+type*2;
+            
+            if(bulletPos.y >= enemyBottom&&bulletPos.y<=enemyTop&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
             {
                 bullet->setLock(true);
                 waitRemoveBullet->addObject(bullet);
@@ -199,13 +229,18 @@ void GameMain::update(float del)
     }
     CCARRAY_FOREACH(waitRemoveEnemy, enemyObj)
     {
+        
         BaseEnemy *enemy = (BaseEnemy*)enemyObj;
+        m_nScore+=50*enemy->getType();
+        const char *score = CCString::createWithFormat("%d",m_nScore)->getCString();
+        m_pScore->setString(score);
         enemies->removeObject(enemy,false);
 		enemy->state = 2;
 		const char *downName = CCString::createWithFormat("enemy%d_down",enemy->getType())->getCString();
 		CCAnimate *downAnimate = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName(downName));
 		CCCallFunc *downCall = CCCallFunc::create(enemy,callfunc_selector(BaseEnemy::removeFromParent));
 		enemy->runAction(CCSequence::create(downAnimate,downCall,NULL));
+        
     }
     CCARRAY_FOREACH(waitRemoveBullet, bulletObj)
     {
@@ -217,5 +252,5 @@ void GameMain::update(float del)
 
 void GameMain::__addAnimationFromArray( std::string *names,int length,int fps,const char *animateName )
 {
-
+    
 }

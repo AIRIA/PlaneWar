@@ -11,6 +11,8 @@ class GameMain:public BaseScene
 private:
     CCSprite *m_pCopyRight;
     CCSprite *m_pLoading;
+    CCLabelBMFont *m_pScore;
+    int m_nScore;
     Hero *m_pHero;
 	void __addAnimationFromArray(std::string *names,int length,int fps,const char *animateName);
     void __addAnimation(const char *prefix,int start,int end,int fps,const char *animationName);
@@ -26,6 +28,8 @@ private:
     void __createEnemy1();
     void __createEnemy2();
     void __createEnemy3();
+    void __initPauseBtn();
+    void __pauseGame(CCObject *pSender);
     CCSpriteBatchNode *m_pBgNode;
     CCSpriteBatchNode *m_pBattleBatchNode;
     float m_nBgHeight;
