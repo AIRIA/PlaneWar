@@ -20,6 +20,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pEGLView->setDesignResolutionSize(480,800,kResolutionExactFit);
     pDirector->setDisplayStats(true);
     pDirector->setAnimationInterval(1.0 / 60);
+    SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("sound/game_music.mp3");
     pDirector->runWithScene(GameMain::create());
     return true;
 }
