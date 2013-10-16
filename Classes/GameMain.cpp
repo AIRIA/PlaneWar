@@ -46,7 +46,7 @@ inline void GameMain::__initBackground()
 void GameMain::__scrollBackground()
 {
     m_pBgNode->setPositionY(0);
-    CCActionInterval *moveDown = CCMoveTo::create(5, ccp(0, -m_nBgHeight));
+    CCActionInterval *moveDown = CCMoveTo::create(7, ccp(0, -m_nBgHeight));
     CCCallFunc *resetHandler = CCCallFunc::create(this, callfunc_selector(GameMain::__scrollBackground));
     CCSequence *moveSeq = CCSequence::create(moveDown,resetHandler,NULL);
     m_pBgNode->runAction(moveSeq);

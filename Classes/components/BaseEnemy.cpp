@@ -92,5 +92,5 @@ void BaseEnemy::stopBaseAction()
 
 void BaseEnemy::destroy()
 {
-	CCLog("destroy");
+//	CCLog("destroy");
 }
