@@ -60,6 +60,7 @@ inline void GameMain::__initAnimation()
     __addAnimation("enemy2_down%d.png",1,4,8,"enemy2_down");
     __addAnimation("enemy3_down%d.png",1,6,8,"enemy3_down");
     __addAnimation("hero_blowup_n%d.png",1,4,8,"hero_down");
+    __addAnimation("enemy3_n%d.png",1,2,8,"enemy3");
 }
 
 inline void GameMain::__initCopyRight()
@@ -79,7 +80,7 @@ inline void GameMain::__initCopyRight()
 
 void GameMain::__gameStart()
 {
-	scheduleUpdate();
+    scheduleUpdate();
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sound/game_music.mp3",true);
     __scrollBackground();
     m_pBgNode->removeChild(m_pLoading,true);
@@ -165,15 +166,34 @@ void GameMain::update(float del)
             CCPoint bulletPos = bullet->getPosition();
             int enemyLeft = enemy->getPositionX()-enemy->getContentSize().width/2;
             int enemyRight = enemy->getPositionX()+enemy->getContentSize().width/2;
-            if(bulletPos.y >= enemy->getPositionY()&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
+			 int type = enemy->getType();
+            if(bulletPos.y >= enemy->getPositionY()+type*5&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
             {
                 bullet->setLock(true);
                 waitRemoveBullet->addObject(bullet);
                 enemy->m_nHP -= 1;
+				enemy->state = 1;
+				enemy->stopBaseAction();
+                if(enemy->getType()!=1)
+                {
+                    const char *hitTName = CCString::createWithFormat("enemy%d_hit.png",enemy->getType())->getCString();
+                    enemy->setDisplayFrame(m_pFrameCache->spriteFrameByName(hitTName));
+                }
                 if(enemy->m_nHP<=0)
                 {
                     waitRemoveEnemy->addObject(enemy);
+					
                 }
+            }
+            else if(enemy->state==1)
+            {
+				enemy->state = 0;
+                const char *hitTName = CCString::createWithFormat("enemy%d.png",type)->getCString();
+				if(type==3){
+					hitTName="enemy3_n1.png";
+				}
+                enemy->setDisplayFrame(m_pFrameCache->spriteFrameByName(hitTName));
+				enemy->runBaseAction();
             }
         }
     }
@@ -181,7 +201,11 @@ void GameMain::update(float del)
     {
         BaseEnemy *enemy = (BaseEnemy*)enemyObj;
         enemies->removeObject(enemy,false);
-        enemy->removeFromParent();
+		enemy->state = 2;
+		const char *downName = CCString::createWithFormat("enemy%d_down",enemy->getType())->getCString();
+		CCAnimate *downAnimate = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName(downName));
+		CCCallFunc *downCall = CCCallFunc::create(enemy,callfunc_selector(BaseEnemy::removeFromParent));
+		enemy->runAction(CCSequence::create(downAnimate,downCall,NULL));
     }
     CCARRAY_FOREACH(waitRemoveBullet, bulletObj)
     {
@@ -189,4 +213,9 @@ void GameMain::update(float del)
         bullets->removeObject(bullet,false);
         bullet->removeFromParent();
     }
+}
+
+void GameMain::__addAnimationFromArray( std::string *names,int length,int fps,const char *animateName )
+{
+
 }

@@ -11,12 +11,15 @@ private:
     virtual void __init();
     bool m_bIsLock;
 public:
-    void setLock(bool val){
+    void setLock(bool val)
+    {
         m_bIsLock = val;
     };
-    bool getLock() const{
+    bool getLock() const
+    {
         return m_bIsLock;
     };
+    Bullet():m_bIsLock(false) {};
     virtual void onEnter();
     virtual void onExit();
     static Bullet *createBullet();

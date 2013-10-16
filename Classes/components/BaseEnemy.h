@@ -13,11 +13,18 @@ private:
     int m_nType;
 public:
     int m_nHP;
+	int state;
     void setType(int val);
+	int getType() const{
+		return m_nType;
+	};
+	void runBaseAction();
+	void stopBaseAction();
+	void destroy();
     float speed;
     virtual void onEnter();
 	virtual void onExit();
-    BaseEnemy();
+	BaseEnemy();
     static BaseEnemy *createEnemy(int type);
 };
 

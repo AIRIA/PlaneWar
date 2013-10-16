@@ -1,15 +1,15 @@
 ﻿#include "BaseEnemy.h"
 
-BaseEnemy::BaseEnemy():m_nHP(100)
+BaseEnemy::BaseEnemy():m_nHP(100),state(0)
 {
-    
+
 };
 
 void BaseEnemy::onEnter()
 {
     CCSprite::onEnter();
     __attack();
-	enemies->addObject(this);
+    enemies->addObject(this);
 }
 
 void BaseEnemy::__attack()
@@ -32,19 +32,6 @@ void BaseEnemy::__init()
 void BaseEnemy::setType( int val )
 {
     m_nType = val;
-    switch (m_nType)
-    {
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    default:
-        break;
-    }
 }
 
 BaseEnemy * BaseEnemy::createEnemy( int type )
@@ -60,9 +47,11 @@ BaseEnemy * BaseEnemy::createEnemy( int type )
 
     if(be&&be->initWithSpriteFrameName(enemyName))
     {
+        be->setType(type);
+		be->runBaseAction();
         be->autorelease();
         be->__init();
-        be->m_nHP = type+(type-1)*(type+1);
+        be->m_nHP = type+(type-1)*(type+6);
     }
     return be;
 }
@@ -78,6 +67,30 @@ void BaseEnemy::__getRandomPosition()
 
 void BaseEnemy::onExit()
 {
-	CCSprite::onExit();
-	enemies->fastRemoveObject(this);
+    CCSprite::onExit();
+    enemies->fastRemoveObject(this);
+}
+
+void BaseEnemy::runBaseAction()
+{
+    if(getType()==3)
+    {
+        CCAnimate *animate = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("enemy3"));
+        CCRepeatForever *rf = CCRepeatForever::create(animate);
+        rf->setTag(1000);
+        runAction(rf);
+    }
+}
+
+void BaseEnemy::stopBaseAction()
+{
+    if(getType()==3)
+    {
+        stopActionByTag(1000);
+    }
+}
+
+void BaseEnemy::destroy()
+{
+	CCLog("destroy");
 }

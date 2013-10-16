@@ -12,6 +12,7 @@ private:
     CCSprite *m_pCopyRight;
     CCSprite *m_pLoading;
     Hero *m_pHero;
+	void __addAnimationFromArray(std::string *names,int length,int fps,const char *animateName);
     void __addAnimation(const char *prefix,int start,int end,int fps,const char *animationName);
     void __gameStart();
     void __initBackground();
