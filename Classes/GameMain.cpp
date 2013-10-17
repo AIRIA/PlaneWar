@@ -17,22 +17,24 @@ bool GameMain::init()
     bullets = CCArray::create();
     enemies->retain();
     bullets->retain();
-    
+
     srand((unsigned)time(NULL));
     m_pBgNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("background.png")->getTexture());
     addChild(m_pBgNode);
     m_pBattleBatchNode = CCSpriteBatchNode::createWithTexture(m_pFrameCache->spriteFrameByName("hero1.png")->getTexture());
     addChild(m_pBattleBatchNode);
-    
+
     __initAnimation();
     __initBackground();
     __initCopyRight();
     m_pScore = CCLabelBMFont::create(" ", "ui/font.fnt");
     m_pScore->setZOrder(100);
-    m_pScore->setPosition(ccp(100,VisibleRect::top().y-30));
+    m_pScore->setAnchorPoint(ccp(0,0.5));
+    m_pScore->setPosition(ccp(60,VisibleRect::top().y-30));
     addChild(m_pScore);
     m_nScore = 0;
-    m_pScore->setColor(ccc3(0, 0, 0));
+    m_pScore->setColor(ccc3(51, 51, 51));
+    m_pScore->setAlignment(kCCTextAlignmentLeft);
     return bRet;
 }
 
@@ -41,6 +43,7 @@ inline void GameMain::__initBackground()
     CCSprite *bg1 = CCSprite::createWithSpriteFrameName("background.png");
     CCSprite *bg2 = CCSprite::createWithSpriteFrameName("background.png");
     m_pBgNode->getTexture()->setAliasTexParameters();
+	bg1->setCascadeOpacityEnabled(true);
     bg1->setAnchorPoint(ccp(0,0));
     bg2->setAnchorPoint(ccp(0,0));
     bg1->setPosition(ccp(0,0));
@@ -110,9 +113,12 @@ void GameMain::__initPauseBtn()
 
 void GameMain::__pauseGame(CCObject *pSender)
 {
-    if(CCDirector::sharedDirector()->isPaused()){
+    if(CCDirector::sharedDirector()->isPaused())
+    {
         CCDirector::sharedDirector()->resume();
-    }else{
+    }
+    else
+    {
         CCDirector::sharedDirector()->pause();
     }
 
@@ -196,14 +202,14 @@ void GameMain::update(float del)
             int enemyRight = enemy->getPositionX()+enemy->getContentSize().width/2;
             int enemyTop = enemy->getPositionY()+enemy->getContentSize().height;
             int enemyBottom = enemy->getPositionY()+type*2;
-            
+
             if(bulletPos.y >= enemyBottom&&bulletPos.y<=enemyTop&&bulletPos.x>enemyLeft&&bulletPos.x<enemyRight)
             {
                 bullet->setLock(true);
                 waitRemoveBullet->addObject(bullet);
                 enemy->m_nHP -= 1;
-				enemy->state = 1;
-				enemy->stopBaseAction();
+                enemy->state = 1;
+                enemy->stopBaseAction();
                 if(enemy->getType()!=1)
                 {
                     const char *hitTName = CCString::createWithFormat("enemy%d_hit.png",enemy->getType())->getCString();
@@ -212,35 +218,36 @@ void GameMain::update(float del)
                 if(enemy->m_nHP<=0)
                 {
                     waitRemoveEnemy->addObject(enemy);
-					
+
                 }
             }
             else if(enemy->state==1)
             {
-				enemy->state = 0;
+                enemy->state = 0;
                 const char *hitTName = CCString::createWithFormat("enemy%d.png",type)->getCString();
-				if(type==3){
-					hitTName="enemy3_n1.png";
-				}
+                if(type==3)
+                {
+                    hitTName="enemy3_n1.png";
+                }
                 enemy->setDisplayFrame(m_pFrameCache->spriteFrameByName(hitTName));
-				enemy->runBaseAction();
+                enemy->runBaseAction();
             }
         }
     }
     CCARRAY_FOREACH(waitRemoveEnemy, enemyObj)
     {
-        
+
         BaseEnemy *enemy = (BaseEnemy*)enemyObj;
         m_nScore+=50*enemy->getType();
         const char *score = CCString::createWithFormat("%d",m_nScore)->getCString();
         m_pScore->setString(score);
         enemies->removeObject(enemy,false);
-		enemy->state = 2;
-		const char *downName = CCString::createWithFormat("enemy%d_down",enemy->getType())->getCString();
-		CCAnimate *downAnimate = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName(downName));
-		CCCallFunc *downCall = CCCallFunc::create(enemy,callfunc_selector(BaseEnemy::removeFromParent));
-		enemy->runAction(CCSequence::create(downAnimate,downCall,NULL));
-        
+        enemy->state = 2;
+        const char *downName = CCString::createWithFormat("enemy%d_down",enemy->getType())->getCString();
+        CCAnimate *downAnimate = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName(downName));
+        CCCallFunc *downCall = CCCallFunc::create(enemy,callfunc_selector(BaseEnemy::removeFromParent));
+        enemy->runAction(CCSequence::create(downAnimate,downCall,NULL));
+
     }
     CCARRAY_FOREACH(waitRemoveBullet, bulletObj)
     {
@@ -252,5 +259,5 @@ void GameMain::update(float del)
 
 void GameMain::__addAnimationFromArray( std::string *names,int length,int fps,const char *animateName )
 {
-    
+
 }
