@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EAF2E06E-4E41-42C0-9C82-1F202F1DE16E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PlaneWar</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F5ACA9E2-D5EA-4009-B120-62CF04B0D902</key>
+		<string>ssh://github.com/AIRIA/PlaneWar.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.mac/PlaneWar.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F5ACA9E2-D5EA-4009-B120-62CF04B0D902</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/AIRIA/PlaneWar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F5ACA9E2-D5EA-4009-B120-62CF04B0D902</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F5ACA9E2-D5EA-4009-B120-62CF04B0D902</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlaneWar</string>
+		</dict>
+	</array>
+</dict>
+</plist>
